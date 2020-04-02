@@ -1,8 +1,0 @@
-Unity TrackIR Plugin
-Tobias Boogh <tobias.boogh@bybrick.se>
-
-Copy the Plugins directory to your Assets directory and view "TrackIRCamera.cs" for usage info.
-Package included with a small and simple demo scene.
-Tested with Unity 2.6 and 3.4.1
-
-Big thanks to Natural Point for their support.
