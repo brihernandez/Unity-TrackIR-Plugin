@@ -98,9 +98,9 @@ namespace TIR
                 }
                 else
                 {
-                    localPos.x = Mathf.Clamp(-tid.fNPSmoothX * -positionMultiplier, positionX.Lower, positionX.Upper);
-                    localPos.y = Mathf.Clamp(tid.fNPSmoothY * positionMultiplier, positionY.Lower, positionY.Upper);
-                    localPos.z = Mathf.Clamp(-tid.fNPSmoothZ * positionMultiplier, positionZ.Lower, positionZ.Upper);
+                    localPos.x = Mathf.Clamp(-tid.fNPX * positionMultiplier, positionX.Lower, positionX.Upper);
+                    localPos.y = Mathf.Clamp(tid.fNPY * positionMultiplier, positionY.Lower, positionY.Upper);
+                    localPos.z = Mathf.Clamp(-tid.fNPZ * positionMultiplier, positionZ.Lower, positionZ.Upper);
 
                     localEulers.y = Mathf.Clamp(-tid.fNPYaw * rotationMultiplier, yawLimits.Lower, yawLimits.Upper);
                     localEulers.x = Mathf.Clamp(tid.fNPPitch * rotationMultiplier, pitchLimits.Lower, pitchLimits.Upper);
