@@ -147,7 +147,9 @@ namespace TIR
             {
                 // Start tracking
                 status = trackIRclient.TrackIR_Enhanced_Init();
-                isRunning = true;
+
+                // Status returns null if TrackIR is not detected at all.
+                isRunning = status != null;
 
                 startPosition = trackedObject.localPosition;
                 startRotation = trackedObject.localRotation;

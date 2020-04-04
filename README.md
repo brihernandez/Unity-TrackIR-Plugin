@@ -1,4 +1,4 @@
-# Unity TrackIR Plugin v1.0
+# Unity TrackIR Plugin v1.1
 
 ![Demo scene](Screenshots/DemoTracking.gif)
 
@@ -41,6 +41,10 @@ This is typical hierarchy I would use for a tracked camera, with the `TrackIRTra
 Optional clamps on position and rotation can be applied by checking the `Use Limits` box.
 
 ## Changelog
+
+### 1.1. (Apr 3 2020)
+
+- Fixed crash when TrackIR is not detected at all
 
 ### 1.0 (Apr 2 2020)
 
