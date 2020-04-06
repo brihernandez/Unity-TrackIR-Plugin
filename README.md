@@ -1,4 +1,4 @@
-# Unity TrackIR Plugin v1.1
+# Unity TrackIR Plugin v1.2
 
 ![Demo scene](Screenshots/DemoTracking.gif)
 
@@ -42,7 +42,11 @@ Optional clamps on position and rotation can be applied by checking the `Use Lim
 
 ## Changelog
 
-### 1.1. (Apr 3 2020)
+### 1.2 (Apr 6 2020)
+
+- Moved the TrackIRTransform component into the same namespace as the TrackIR plugin code (TrackIRUnity)
+
+### 1.1 (Apr 3 2020)
 
 - Fixed crash when TrackIR is not detected at all
 

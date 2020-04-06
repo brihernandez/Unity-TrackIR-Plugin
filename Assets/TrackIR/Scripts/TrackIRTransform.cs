@@ -1,7 +1,6 @@
 using UnityEngine;
-using TrackIRUnity;
 
-namespace TIR
+namespace TrackIRUnity
 {
     [System.Serializable]
     public struct Limit
