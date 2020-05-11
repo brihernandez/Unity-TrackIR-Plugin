@@ -4,9 +4,9 @@
 
 As I started to integrate the old Track IR plugin code into a small test project, I ended up re-writing a lot how it interfaces with Unity. This new version includes a bunch of quality of fixes and re-organizes the code into something that more closely matches how Unity code is written today.
 
-The original code is quite old and originally built for Unity 2.6!
+The original code is quite old and was built for Unity 2.6!
 
-The TrackIR plugin [was originally written by Tobias Boogh](https://github.com/byBrick/Unity-TrackIR-Plugin), and [updated by Chris Reed](https://github.com/chrisreedio/Unity-TrackIR-Plugin/tree/x86_64) with 64 bit binaries required for recent versions of Unity.
+The TrackIR plugin [was originally written by Tobias Boogh](https://github.com/byBrick/Unity-TrackIR-Plugin), and [updated by Chris Reed](https://github.com/chrisreedio/Unity-TrackIR-Plugin/tree/x86_64) with 64 bit binaries required for recent versions of Unity. All I've done is modernize it and make it easier to use.
 
 This project was built in **Unity 2017.4.37f1**
 
@@ -19,8 +19,6 @@ You can either clone the repository or [download the asset package](https://gith
 ![The tracking component](Screenshots/Component.png)
 
 The `TrackIRTransform` component takes raw input from TrackIR, and then modifies the assigned `Tracked Object` to mirror those inputs in **local space**. All inputs are also offset from wherever the object already was in local space, so you can have an object at some position, E.g. (0, 1, 3) with a rotation of (30, 0, 0) and all movement/rotation will be done relative to those offsets.
-
-**Important!:** Since movement is handled in local space, TrackIR positional offsets do not work correctly if the `Tracked Object` is not facing forwards.
 
 The default values for the `Position Multiplier` and `Rotation Multiplier` are magic numbers that I've found to make the Unity results match 1:1 what the TrackIR application reports the results *should* be. I've left them configurable either way in case it they need to be adjusted.
 
