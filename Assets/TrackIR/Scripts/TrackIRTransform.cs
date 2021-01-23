@@ -42,20 +42,24 @@ namespace TrackIRUnity
         [Tooltip("Rect to draw the debug text in.")]
         public Rect dataRect = new Rect(10, 295, 300, 200);
 
-        private TrackIRClient trackIRclient = null;
+        private static TrackIRClient trackIRclient = null;
 
         private string status = "";
         private string data = "";
 
-        private bool isRunning = false;
+        private static bool isRunning = false;
 
         private Vector3 startPosition = Vector3.zero;
         private Quaternion startRotation = Quaternion.identity;
 
+        public bool IsRunning { get { return enabled && isRunning; } }
+
         private void Awake()
         {
-            // Create an instance of the TrackerIR Client to get data from
-            trackIRclient = new TrackIRClient();
+            // Create a static instance of the TrackerIR Client to get data from
+            if (trackIRclient == null)
+                trackIRclient = new TrackIRClient();
+
             status = "";
             data = "";
         }
@@ -81,7 +85,6 @@ namespace TrackIRUnity
                 // Data for head tracking
                 TrackIRClient.LPTRACKIRDATA tid = trackIRclient.client_HandleTrackIRData();
 
-                // Updates main camera, change to whatever
                 Vector3 localPos = trackedObject.localPosition;
                 Vector3 localEulers = trackedObject.localRotation.eulerAngles;
 
@@ -106,7 +109,7 @@ namespace TrackIRUnity
                     localEulers.z = Mathf.Clamp(tid.fNPRoll * rotationMultiplier, rollLimits.Lower, rollLimits.Upper);
                 }
 
-                trackedObject.localRotation = startRotation * Quaternion.Euler(localEulers);
+                trackedObject.localRotation = Quaternion.Euler(localEulers) * startRotation;
                 trackedObject.localPosition = startPosition + localPos;
             }
         }
@@ -136,6 +139,12 @@ namespace TrackIRUnity
 
         public void StartTracking()
         {
+            if (trackIRclient == null)
+            {
+                Debug.Log(name = "No TrackIR client found.");
+                return;
+            }
+
             if (trackedObject == null)
             {
                 Debug.LogError(name + ": Attempted to start TrackIR tracking without an assigned Tracked Object");
@@ -144,14 +153,21 @@ namespace TrackIRUnity
 
             if (!isRunning)
             {
-                // Start tracking
-                status = trackIRclient.TrackIR_Enhanced_Init();
+                try
+                {
+                    // Start tracking
+                    status = trackIRclient.TrackIR_Enhanced_Init();
+                    isRunning = status != null;
 
-                // Status returns null if TrackIR is not detected at all.
-                isRunning = status != null;
-
-                startPosition = trackedObject.localPosition;
-                startRotation = trackedObject.localRotation;
+                    startPosition = trackedObject.localPosition;
+                    startRotation = trackedObject.localRotation;
+                }
+                catch
+                {
+                    // The DLL will throw an exception if it fails to initialize. This is the only
+                    // way to tell if the user has TrackIR installed or not.
+                    Debug.Log("No TrackIR client found.");
+                }
             }
         }
 
